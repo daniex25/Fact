@@ -1,88 +1,308 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Register - SB Admin</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">First name</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Last name</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-                                                        <label for="inputPassword">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">Confirm Password</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
-                                            </div>
-                                        </form>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Registro de clientes" />
+    <meta name="author" content="" />
+    <title>Registro - SB Admin</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bs-primary: #0d6efd;
+            --bs-primary-dark: #0a58ca;
+        }
+        .register-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+        }
+        .register-icon {
+            font-size: 3rem;
+            color: var(--bs-primary);
+            margin-bottom: 1.5rem;
+        }
+        .form-floating label {
+            padding-left: 2.5rem;
+        }
+        .form-floating .bi {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            color: var(--bs-primary);
+        }
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        .btn-primary:hover {
+            background-color: var(--bs-primary-dark);
+            border-color: var(--bs-primary-dark);
+        }
+        .navbar {
+            background-color: var(--bs-primary) !important;
+        }
+    </style>
+</head>
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <!-- NAVBAR SB ADMIN STYLE -->
+            <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+                <div class="container px-4 px-lg-5">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                        <i class="bi bi-shop-window me-2"></i>
+                        <span>Sistema Comercial</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRegister">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarRegister">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="bi bi-house-door me-1"></i> Inicio
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.html">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="register.html">
+                                    <i class="bi bi-person-plus me-1"></i> Registro
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <main>
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="register-container mt-5">
+                        <div class="text-center">
+                            <div class="register-icon">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                            <h2 class="fw-bold mb-4">Registro de Cliente</h2>
+                        </div>
+                        <form id="registerForm" class="needs-validation" novalidate>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-hash"></i>
+                                        <input class="form-control ps-5" id="codiClie" type="number" placeholder="Código" required>
+                                        <label for="codiClie">Código</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese un código de cliente válido
+                                        </div>
                                     </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-credit-card-2-front"></i>
+                                        <input class="form-control ps-5" id="ndniClie" type="text" maxlength="8" placeholder="DNI" required>
+                                        <label for="ndniClie">DNI (8 dígitos)</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese un DNI válido de 8 dígitos
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-calendar-date"></i>
+                                        <input class="form-control ps-5" id="fechNaciClie" type="date" placeholder="Fecha de Nacimiento" required>
+                                        <label for="fechNaciClie">Fecha de Nacimiento</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese la fecha de nacimiento
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-person-vcard"></i>
+                                        <input class="form-control ps-5" id="appaClie" type="text" placeholder="Apellido Paterno" required>
+                                        <label for="appaClie">Apellido Paterno</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese el apellido paterno
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-person-vcard"></i>
+                                        <input class="form-control ps-5" id="apmaClie" type="text" placeholder="Apellido Materno" required>
+                                        <label for="apmaClie">Apellido Materno</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese el apellido materno
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-person-fill"></i>
+                                        <input class="form-control ps-5" id="nombClie" type="text" placeholder="Nombres" required>
+                                        <label for="nombClie">Nombres</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese los nombres
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-person-circle"></i>
+                                        <input class="form-control ps-5" id="logiClie" type="text" placeholder="Usuario" required>
+                                        <label for="logiClie">Usuario</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese el nombre de usuario
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0 position-relative">
+                                        <i class="bi bi-key-fill"></i>
+                                        <input class="form-control ps-5" id="passClie" type="password" placeholder="Contraseña" required>
+                                        <label for="passClie">Contraseña</label>
+                                        <div class="invalid-feedback">
+                                            Ingrese la contraseña
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <span id="submitText">Registrar</span>
+                                    <span id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                                </button>
+                            </div>
+                            <div id="message" class="alert alert-danger d-none"></div>
+                            <div class="text-center mt-3">
+                                <p class="mb-0">¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+                            </div>
+                        </form>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </main>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+        <div id="layoutAuthentication_footer">
+            <footer class="py-5 bg-dark mt-auto">
+                <div class="container px-4 px-lg-5">
+                    <p class="m-0 text-center text-white">
+                        Sistema Comercial &copy; <span id="current-year"></span> |
+                        <small>Versión 1.0.0</small>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- Script personalizado para el registro -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar año actual en el footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Validación del formulario y registro
+            const form = document.getElementById('registerForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+                
+                // Obtener valores
+                const codiClie = document.getElementById("codiClie").value.trim();
+                const ndniClie = document.getElementById("ndniClie").value.trim();
+                const appaClie = document.getElementById("appaClie").value.trim();
+                const apmaClie = document.getElementById("apmaClie").value.trim();
+                const nombClie = document.getElementById("nombClie").value.trim();
+                const fechNaciClie = document.getElementById("fechNaciClie").value;
+                const logiClie = document.getElementById("logiClie").value.trim();
+                const passClie = document.getElementById("passClie").value;
+
+                // Validaciones adicionales
+                const messageDiv = document.getElementById("message");
+                messageDiv.classList.add('d-none');
+                if (ndniClie.length !== 8 || isNaN(ndniClie)) {
+                    messageDiv.textContent = "El DNI debe tener 8 dígitos numéricos";
+                    messageDiv.classList.remove('d-none');
+                    return;
+                }
+
+                // Spinner y deshabilitar botón
+                const submitText = document.getElementById("submitText");
+                const submitSpinner = document.getElementById("submitSpinner");
+                const submitBtn = form.querySelector('button[type="submit"]');
+
+                submitText.textContent = "Registrando...";
+                submitSpinner.classList.remove('d-none');
+                submitBtn.disabled = true;
+
+                // Construir objeto cliente
+                const cliente = {
+                    codiClie: parseInt(codiClie, 10),
+                    ndniClie: ndniClie,
+                    appaClie: appaClie,
+                    apmaClie: apmaClie,
+                    nombClie: nombClie,
+                    fechNaciClie: fechNaciClie,
+                    logiClie: logiClie,
+                    passClie: passClie
+                };
+
+                // Enviar datos al servidor
+                fetch('cliente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(cliente)
+                })
+                .then(response => {
+                    if (response.status === 201) {
+                        // Registro exitoso
+                        messageDiv.textContent = "¡Registro exitoso! Redirigiendo al inicio...";
+                        messageDiv.classList.remove('d-none', 'alert-danger');
+                        messageDiv.classList.add('alert-success');
+                        // Redirigir a index.html luego de unos segundos
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 1500);
+                    } else {
+                        throw new Error('Error al registrar cliente. Verifique los datos o si el código ya existe.');
+                    }
+                })
+                .catch(error => {
+                    messageDiv.textContent = error.message;
+                    messageDiv.classList.remove('d-none', 'alert-success');
+                    messageDiv.classList.add('alert-danger');
+                    console.error('Error:', error);
+                })
+                .finally(() => {
+                    submitText.textContent = "Registrar";
+                    submitSpinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
 </html>
