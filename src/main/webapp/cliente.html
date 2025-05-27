@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>Gestor de Clientes</h1>
+</center>
+<div class="form-container">
+    <div class="form-group">
+        <input type="number" id="codiClie" placeholder="Código de Cliente">
+        <input type="text" id="ndniClie" placeholder="DNI (8 dígitos)">
+    </div>
+    <div class="form-group">
+        <input type="text" id="appaClie" placeholder="Apellido Paterno">
+        <input type="text" id="apmaClie" placeholder="Apellido Materno">
+    </div>
+    <div class="form-group">
+        <input type="text" id="nombClie" placeholder="Nombres">
+        <input type="date" id="fechNaciClie" placeholder="Fecha de Nacimiento">
+    </div>
+    <div class="form-group">
+        <input type="text" id="logiClie" placeholder="Nombre de Usuario">
+        <input type="password" id="passClie" placeholder="Contraseña">
+    </div>
+</div>
+<center>
+    <div>
+        <button onclick="guardarCliente()">Guardar</button>
+        <button onclick="listarClientes()">Listar</button>
+        <button onclick="editarCliente()">Editar</button>
+        <button onclick="eliminarCliente()">Eliminar</button>
+    </div>
+</center>
+<center>
+    <table id="tablaClientes">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Nombres</th>
+                <th>Fecha Nac.</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</center>
+
+<script>
+    const API_URL = "cliente";
+
+    function limpiarFormulario() {
+        document.getElementById("codiClie").value = "";
+        document.getElementById("ndniClie").value = "";
+        document.getElementById("appaClie").value = "";
+        document.getElementById("apmaClie").value = "";
+        document.getElementById("nombClie").value = "";
+        document.getElementById("fechNaciClie").value = "";
+        document.getElementById("logiClie").value = "";
+        document.getElementById("passClie").value = "";
+    }
+
+    async function guardarCliente() {
+        const cliente = {
+            codiClie: parseInt(document.getElementById("codiClie").value),
+            ndniClie: document.getElementById("ndniClie").value,
+            appaClie: document.getElementById("appaClie").value,
+            apmaClie: document.getElementById("apmaClie").value,
+            nombClie: document.getElementById("nombClie").value,
+            fechNaciClie: document.getElementById("fechNaciClie").value,
+            logiClie: document.getElementById("logiClie").value,
+            passClie: document.getElementById("passClie").value
+        };
+
+        if (!validarCliente(cliente)) return;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(cliente)
+            });
+
+            if (response.status === 201) {
+                alert("Cliente guardado con éxito!");
+                limpiarFormulario();
+                listarClientes();
+            } else {
+                alert("Error al guardar el cliente");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al conectar con el servidor");
+        }
+    }
+
+    async function listarClientes() {
+        try {
+            const response = await fetch(API_URL);
+            const clientes = await response.json();
+            const tbody = document.querySelector("#tablaClientes tbody");
+            tbody.innerHTML = "";
+
+            clientes.forEach(cliente => {
+                const row = `<tr onclick="cargarCliente(${cliente.codiClie})">
+                    <td>${cliente.codiClie}</td>
+                    <td>${cliente.ndniClie}</td>
+                    <td>${cliente.appaClie}</td>
+                    <td>${cliente.apmaClie}</td>
+                    <td>${cliente.nombClie}</td>
+                    <td>${cliente.fechNaciClie}</td>
+                    <td>${cliente.logiClie}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        } catch (error) {
+            console.error("Error al listar:", error);
+            alert("Error al obtener la lista de clientes");
+        }
+    }
+
+    async function cargarCliente(codiClie) {
+        try {
+            const response = await fetch(`${API_URL}?codiClie=${codiClie}`);
+            if (response.status === 200) {
+                const cliente = await response.json();
+                document.getElementById("codiClie").value = cliente.codiClie;
+                document.getElementById("ndniClie").value = cliente.ndniClie;
+                document.getElementById("appaClie").value = cliente.appaClie;
+                document.getElementById("apmaClie").value = cliente.apmaClie;
+                document.getElementById("nombClie").value = cliente.nombClie;
+                document.getElementById("fechNaciClie").value = cliente.fechNaciClie;
+                document.getElementById("logiClie").value = cliente.logiClie;
+                document.getElementById("passClie").value = cliente.passClie;
+            } else {
+                alert("Cliente no encontrado");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al cargar el cliente");
+        }
+    }
+
+    async function editarCliente() {
+        const cliente = {
+            codiClie: parseInt(document.getElementById("codiClie").value),
+            ndniClie: document.getElementById("ndniClie").value,
+            appaClie: document.getElementById("appaClie").value,
+            apmaClie: document.getElementById("apmaClie").value,
+            nombClie: document.getElementById("nombClie").value,
+            fechNaciClie: document.getElementById("fechNaciClie").value,
+            logiClie: document.getElementById("logiClie").value,
+            passClie: document.getElementById("passClie").value
+        };
+
+        if (!cliente.codiClie) {
+            alert("Ingresa un ID válido");
+            return;
+        }
+
+        if (!validarCliente(cliente)) return;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(cliente)
+            });
+
+            if (response.status === 200) {
+                alert("Cliente actualizado con éxito!");
+                limpiarFormulario();
+                listarClientes();
+            } else if (response.status === 404) {
+                alert("Cliente no encontrado");
+            } else {
+                alert("Error al actualizar el cliente");
+            }
+        } catch (error) {
+            console.error("Error al editar:", error);
+            alert("Error al conectar con el servidor");
+        }
+    }
+
+    async function eliminarCliente() {
+        const codiClie = document.getElementById("codiClie").value;
+
+        if (!codiClie) {
+            alert("Ingresa un ID válido");
+            return;
+        }
+
+        if (!confirm("¿Estás seguro de eliminar este cliente?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}?codiClie=${codiClie}`, {
+                method: "DELETE"
+            });
+
+            if (response.status === 204) {
+                alert("Cliente eliminado con éxito!");
+                limpiarFormulario();
+                listarClientes();
+            } else if (response.status === 404) {
+                alert("Cliente no encontrado");
+            } else {
+                alert("Error al eliminar el cliente");
+            }
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+            alert("Error al conectar con el servidor");
+        }
+    }
+
+    function validarCliente(cliente) {
+        if (!cliente.codiClie || isNaN(cliente.codiClie)) {
+            alert("Ingrese un código de cliente válido");
+            return false;
+        }
+        if (!cliente.ndniClie || cliente.ndniClie.length !== 8) {
+            alert("El DNI debe tener 8 dígitos");
+            return false;
+        }
+        if (!cliente.appaClie) {
+            alert("Ingrese el apellido paterno");
+            return false;
+        }
+        if (!cliente.apmaClie) {
+            alert("Ingrese el apellido materno");
+            return false;
+        }
+        if (!cliente.nombClie) {
+            alert("Ingrese los nombres");
+            return false;
+        }
+        if (!cliente.fechNaciClie) {
+            alert("Ingrese la fecha de nacimiento");
+            return false;
+        }
+        if (!cliente.logiClie) {
+            alert("Ingrese el nombre de usuario");
+            return false;
+        }
+        if (!cliente.passClie) {
+            alert("Ingrese la contraseña");
+            return false;
+        }
+        return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", listarClientes);
+</script>
+</body>
+</html>
