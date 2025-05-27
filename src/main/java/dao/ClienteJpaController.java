@@ -72,7 +72,7 @@ public class ClienteJpaController implements Serializable {
             }
         }
     }
-
+    //Alianza lima campeon (atte: Nikc)
     public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
