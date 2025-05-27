@@ -35,7 +35,7 @@ public class ClienteServlet extends HttpServlet {
             List<Cliente> clientes = em.createNamedQuery("Cliente.findAll", Cliente.class).getResultList();
             JSONArray jsonArray = new JSONArray();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            
+            //recuerda que el date es en año-mes-dia no dia-año-mes
             for (Cliente c : clientes) {
                 JSONObject obj = new JSONObject();
                 obj.put("codiClie", c.getCodiClie());
