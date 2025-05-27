@@ -6,5 +6,6 @@ public class NonexistentEntityException extends Exception {
     }
     public NonexistentEntityException(String message) {
         super(message);
+        //no te olvides cambiar el mensaje por message
     }
 }
