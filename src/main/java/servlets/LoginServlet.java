@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             
             String logiClie = json.getString("logiClie");
             String passClie = json.getString("passClie");
-
+            //Contraseña sugerida para el primero: "PizzaConPiña"
             Query query = em.createQuery("SELECT c FROM Cliente c WHERE c.logiClie = :logiClie AND c.passClie = :passClie");
             query.setParameter("logiClie", logiClie);
             query.setParameter("passClie", passClie);
