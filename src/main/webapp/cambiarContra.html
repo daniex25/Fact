@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Cambiar contraseña" />
+    <meta name="author" content="" />
+    <title>Cambiar Contraseña - SB Admin</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bs-primary: #0d6efd;
+            --bs-primary-dark: #0a58ca;
+        }
+        .change-pass-container {
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+        }
+        .change-pass-icon {
+            font-size: 3rem;
+            color: var(--bs-primary);
+            margin-bottom: 1.5rem;
+        }
+        .form-floating label {
+            padding-left: 2.5rem;
+        }
+        .form-floating .bi {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            color: var(--bs-primary);
+        }
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        .btn-primary:hover {
+            background-color: var(--bs-primary-dark);
+            border-color: var(--bs-primary-dark);
+        }
+        .navbar {
+            background-color: var(--bs-primary) !important;
+        }
+    </style>
+</head>
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <!-- NAVBAR SB ADMIN STYLE -->
+            <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+                <div class="container px-4 px-lg-5">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                        <i class="bi bi-shop-window me-2"></i>
+                        <span>Sistema Comercial</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPass">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarPass">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="bi bi-house-door me-1"></i> Inicio
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="menu.html">
+                                    <i class="bi bi-list-task me-1"></i> Menú
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.html">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <main>
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="change-pass-container mt-5">
+                        <div class="text-center">
+                            <div class="change-pass-icon">
+                                <i class="bi bi-key"></i>
+                            </div>
+                            <h2 class="fw-bold mb-4">Cambiar Contraseña</h2>
+                        </div>
+                        <form id="changePassForm" class="needs-validation" novalidate>
+                            <div class="form-floating mb-4 position-relative">
+                                <i class="bi bi-person-fill"></i>
+                                <input type="text" class="form-control ps-5" id="logiClie" placeholder="Usuario" required>
+                                <label for="logiClie">Usuario</label>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese el usuario.
+                                </div>
+                            </div>
+                            <div class="form-floating mb-4 position-relative">
+                                <i class="bi bi-lock-fill"></i>
+                                <input type="password" class="form-control ps-5" id="actualPass" placeholder="Clave Actual" required autocomplete="current-password">
+                                <label for="actualPass">Clave Actual</label>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su clave actual.
+                                </div>
+                            </div>
+                            <div class="form-floating mb-4 position-relative">
+                                <i class="bi bi-lock"></i>
+                                <input type="password" class="form-control ps-5" id="newPass" placeholder="Nueva Clave" required autocomplete="new-password">
+                                <label for="newPass">Nueva Clave</label>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese la nueva clave.
+                                </div>
+                            </div>
+                            <div class="form-floating mb-4 position-relative">
+                                <i class="bi bi-lock"></i>
+                                <input type="password" class="form-control ps-5" id="confPass" placeholder="Confirme Nueva Clave" required>
+                                <label for="confPass">Confirmar Nueva Clave</label>
+                                <div class="invalid-feedback">
+                                    Por favor confirme la nueva clave.
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <span id="submitText">Cambiar</span>
+                                    <span id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                                </button>
+                            </div>
+                            <div id="message" class="alert alert-danger d-none"></div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div id="layoutAuthentication_footer">
+            <footer class="py-5 bg-dark mt-auto">
+                <div class="container px-4 px-lg-5">
+                    <p class="m-0 text-center text-white">
+                        Sistema Comercial &copy; <span id="current-year"></span> |
+                        <small>Versión 1.0.0</small>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- Script personalizado para cambio de contraseña -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Rellenar automáticamente el usuario de sesión si existe
+            const logiClieSession = sessionStorage.getItem('username');
+            if (logiClieSession) {
+                document.getElementById('logiClie').value = logiClieSession;
+            }
+
+            const form = document.getElementById('changePassForm');
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                const logiClie = document.getElementById('logiClie').value.trim();
+                const actualPass = document.getElementById('actualPass').value;
+                const newPass = document.getElementById('newPass').value;
+                const confPass = document.getElementById('confPass').value;
+                const messageDiv = document.getElementById("message");
+                messageDiv.classList.add('d-none');
+                messageDiv.classList.remove('alert-success');
+                messageDiv.classList.add('alert-danger');
+
+                // Validaciones JS
+                if (!logiClie || !actualPass || !newPass || !confPass) {
+                    messageDiv.textContent = "Por favor complete todos los campos.";
+                    messageDiv.classList.remove('d-none');
+                    return;
+                }
+                if (newPass.length < 4) {
+                    messageDiv.textContent = "La nueva clave debe tener al menos 4 caracteres.";
+                    messageDiv.classList.remove('d-none');
+                    return;
+                }
+                if (newPass !== confPass) {
+                    messageDiv.textContent = "La confirmación no coincide con la nueva clave.";
+                    messageDiv.classList.remove('d-none');
+                    return;
+                }
+
+                // Spinner
+                const submitText = document.getElementById("submitText");
+                const submitSpinner = document.getElementById("submitSpinner");
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitText.textContent = "Cambiando...";
+                submitSpinner.classList.remove('d-none');
+                submitBtn.disabled = true;
+
+                // 1. Buscar el cliente por logiClie para obtener codiClie y datos
+                let cliente = null;
+                try {
+                    const res = await fetch(`cliente`);
+                    if (!res.ok) throw new Error("No se pudo obtener datos del usuario.");
+                    const clientes = await res.json();
+                    cliente = clientes.find(c => c.logiClie === logiClie);
+                } catch (err) {
+                    messageDiv.textContent = "Error al obtener datos del usuario. Intente de nuevo.";
+                    messageDiv.classList.remove('d-none');
+                    submitText.textContent = "Cambiar";
+                    submitSpinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                if (!cliente) {
+                    messageDiv.textContent = "Usuario no encontrado.";
+                    messageDiv.classList.remove('d-none');
+                    submitText.textContent = "Cambiar";
+                    submitSpinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // 2. Validar clave actual
+                if (cliente.passClie !== actualPass) {
+                    messageDiv.textContent = "La clave actual es incorrecta.";
+                    messageDiv.classList.remove('d-none');
+                    submitText.textContent = "Cambiar";
+                    submitSpinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                // 3. Actualizar objeto con nueva clave
+                cliente.passClie = newPass;
+
+                // 4. Enviar PUT al servlet
+                fetch('cliente', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(cliente)
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        messageDiv.textContent = "¡Contraseña cambiada exitosamente!";
+                        messageDiv.classList.remove('d-none', 'alert-danger');
+                        messageDiv.classList.add('alert-success');
+                        // Redirigir tras 1.5s a index.html
+                        setTimeout(() => { window.location.href = "index.html"; }, 1500);
+                    } else {
+                        throw new Error("Error al cambiar contraseña.");
+                    }
+                })
+                .catch(error => {
+                    messageDiv.textContent = error.message;
+                    messageDiv.classList.remove('d-none', 'alert-success');
+                    messageDiv.classList.add('alert-danger');
+                })
+                .finally(() => {
+                    submitText.textContent = "Cambiar";
+                    submitSpinner.classList.add('d-none');
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
